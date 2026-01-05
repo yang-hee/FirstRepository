@@ -1,3 +1,1 @@
-test2
-modified
-깃 브랜치 실습하기~!
+feature2에서도 feature1과 같은 파일을 수정해보는 중
