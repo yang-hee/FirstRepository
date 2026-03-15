@@ -7,12 +7,21 @@
   pointer-events: none;
 }
 
+.board{
+  background-color: khaki;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgb(0, 0, 0, 0.1);
+  overflow: hidden;
+  color: darkolivegreen
+}
+
 .container {
   background-color: darkolivegreen;
   min-width: 800px;
   margin: 0 auto;
   padding: 20px;
   color: white;
+  text-align: center;
 }
 
 .head-text {
