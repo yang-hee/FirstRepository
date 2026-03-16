@@ -1,4 +1,5 @@
 import { useState } from "react";
+import TodoModal from "./TodoModal";
 // type은 기존의 타입들을 사용해서 새로운 타입을 만들때!
 // interface는 객체의 구조를 정의할때 사용!
 type Todo = {
@@ -115,6 +116,7 @@ const TodoList: React.FC = () => {
                     ))}
                 </ul>
             </div>
+            <TodoModal show={showDetail} todo={selectedTodo} handleClose={handleCloseDetail}/>
         </div>
     )
 }

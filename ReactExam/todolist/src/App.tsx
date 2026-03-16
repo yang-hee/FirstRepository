@@ -8,6 +8,7 @@ import './App.css';
 import TodoList from './Todolist';
 import Timer from './Timer';
 import Clock from './Clock';
+import MyWeather from './MyWeather';
 
 function App() {
   // let name = "yanghee"
@@ -29,6 +30,7 @@ function App() {
       <Timer />
       <Clock />
       <TodoList />
+      <MyWeather weather="맑음">일기예보</MyWeather>
     </div>
   );
 }
