@@ -1,0 +1,6 @@
+/* 기본으로 적용해주는 margin, padding 세팅 초기화 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-flex;
+}
