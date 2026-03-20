@@ -1,4 +1,3 @@
-import React from 'react'
 import type { IList } from '../../types';
 import List from '../List/List';
 import ActionButton from '../ActionButton/ActionButton';
