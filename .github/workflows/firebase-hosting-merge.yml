@@ -11,9 +11,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        working-directory: task-app
+        run: npm ci
+
+      - name: Build app
+        working-directory: task-app
+        run: npm run build
+        
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_REACT_TASK_APP_43536 }}
           channelId: live
           projectId: react-task-app-43536
+          entryPoint: task-app
