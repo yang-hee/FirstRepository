@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import { ThemeName } from "../../style/theme"
+// import { ThemeName } from "../../style/theme"
 import { ThemeContext } from "../../context/themeContext"
 
 function ThemeSwitcher() {
