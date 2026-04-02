@@ -2,11 +2,13 @@ import styled from "styled-components";
 import logo from "../../assets/images/logo.png";
 import { Link } from "react-router-dom";
 import { useCategory } from "../../hooks/useCategory";
+import { useAuthStore } from "../../store/authStore";
 // 리액트 아이콘 v19와 호환성 문제..
 // import {FaSignInAlt, FaRegUser} from 'react-icons/fa'
 
 function Header() {
   const { category } = useCategory();
+  const { isLoggedIn, storeLogout } = useAuthStore();
   return (
     <HeaderStyle>
       <h1 className="logo">
@@ -17,14 +19,16 @@ function Header() {
       <nav className="category">
         <ul>
           {category.map((item) => (
-            <li key={item.id}>
+            <li key={item.category_id}>
               {/* 링크를 위한 a 태그, 쿼리스트링 이용*/}
               <Link
                 to={
-                  item.id === null ? "/books" : `/books?category_id=${item.id}`
+                  item.category_id === null
+                    ? "/books"
+                    : `/books?category_id=${item.category_id}`
                 }
               >
-                {item.name}
+                {item.category_name}
               </Link>
             </li>
           ))}
@@ -32,20 +36,34 @@ function Header() {
       </nav>
       {/* 추후 로그인 인증과정을 거친 후 분기! */}
       <nav className="auth">
-        <ul>
-          <li>
-            <a href="/login">
-              {/* <FaSignInAlt /> */}
-              로그인
-            </a>
-          </li>
-          <li>
-            <a href="signup">
-              {/* <FaRegUser /> */}
-              회원가입
-            </a>
-          </li>
-        </ul>
+        {isLoggedIn && (
+          <ul>
+            <li>
+              <Link to="/cart">장바구니</Link>
+            </li>
+            <li>
+              <Link to="/orderlist">주문내역</Link>
+            </li>
+
+            <button onClick={storeLogout}>로그아웃</button>
+          </ul>
+        )}
+        {!isLoggedIn && (
+          <ul>
+            <li>
+              <a href="/login">
+                {/* <FaSignInAlt /> */}
+                로그인
+              </a>
+            </li>
+            <li>
+              <a href="signup">
+                {/* <FaRegUser /> */}
+                회원가입
+              </a>
+            </li>
+          </ul>
+        )}
       </nav>
       {/* <h1>book store</h1> */}
     </HeaderStyle>
@@ -94,13 +112,17 @@ const HeaderStyle = styled.header`
       display: flex;
       gap: 16px;
       li {
-        a {
+        a,
+        button {
           font-size: 1rem;
           font-weight: 600;
           text-decoration: none;
           display: flex;
           align-items: center;
           line-height: 1;
+          background: none;
+          border: 0;
+          cursor: pointer;
           svg {
             margin-right: 6px;
           }

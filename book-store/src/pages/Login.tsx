@@ -4,25 +4,22 @@ import styled from "styled-components";
 import InputText from "../components/common/InputText";
 import Button from "../components/common/Button";
 import { useForm } from "react-hook-form";
-import { signup } from "../api/auth.api";
+import { login, signup } from "../api/auth.api";
 import { Link, useNavigate } from "react-router-dom";
 import { useAlert } from "../hooks/useAlert";
+import { useAuthStore } from "../store/authStore";
 
 export interface SignupProps {
   email: string;
   password: string;
 }
 
-function Signup() {
+function Login() {
   const navigate = useNavigate();
   const showAlert = useAlert();
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
 
-  // const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-  //   event.preventDefault();
-  //   console.log(email, password);
-  // };
+  const { isLoggedIn, storeLogin, storeLogout } = useAuthStore();
+
   const {
     register,
     handleSubmit,
@@ -30,17 +27,22 @@ function Signup() {
   } = useForm<SignupProps>();
 
   const onSubmit = (data: SignupProps) => {
-    signup(data).then((res) => {
-      // 성공
-      showAlert("회원가입이 완료되었습니다.");
-      navigate("/login");
-    });
-    // console.log(data);
+    login(data).then(
+      (res) => {
+        storeLogin(res.token);
+
+        showAlert("로그인 완료되었습니다.");
+        navigate("/");
+      },
+      (error) => {
+        showAlert("로그인에 실패했습니다!");
+      },
+    );
   };
 
   return (
     <>
-      <Title size="large">회원가입</Title>
+      <Title size="large">로그인</Title>
       <SignupStyle>
         <form onSubmit={handleSubmit(onSubmit)}>
           <fieldset>
@@ -65,7 +67,7 @@ function Signup() {
           </fieldset>
           <fieldset>
             <Button type="submit" size="medium" schema="primary">
-              회원가입
+              로그인
             </Button>
           </fieldset>
           <div className="info">
@@ -99,4 +101,4 @@ export const SignupStyle = styled.div`
   }
 `;
 
-export default Signup;
+export default Login;
