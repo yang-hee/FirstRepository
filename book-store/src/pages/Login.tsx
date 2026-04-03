@@ -29,6 +29,7 @@ function Login() {
   const onSubmit = (data: SignupProps) => {
     login(data).then(
       (res) => {
+        console.log("토큰 저장 하니", res, res.token);
         storeLogin(res.token);
 
         showAlert("로그인 완료되었습니다.");

@@ -17,6 +17,6 @@ export interface Book {
 
 // Book 에서 확장! Book의 요소 포함
 export interface BookDetail extends Book {
-  categoryName: string;
+  category_name: string;
   liked: boolean;
 }

@@ -11,11 +11,19 @@ export const createClient = (config?: AxiosRequestConfig) => {
     headers: {
       // json을 통해서 컨텐츠를 구현하겠다.
       "Content-Type": "application/json",
-      Authorization: getToken() ? getToken() : "",
+      // Authorization: getToken() ? getToken() : "",
     },
     withCredentials: true,
     // parameter로 전달된 config!
     ...config,
+  });
+  axiosInstance.interceptors.request.use((config) => {
+    const token = getToken();
+    if (token) {
+      config.headers.Authorization = token;
+    }
+
+    return config;
   });
 
   // axios return 값 처리!
