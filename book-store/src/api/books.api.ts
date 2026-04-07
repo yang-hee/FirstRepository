@@ -49,3 +49,8 @@ export const unlikeBook = async (bookId: string) => {
   const response = await httpClient.delete(`/likes/${bookId}`);
   return response.data;
 };
+
+export const fetchBestBooks = async () => {
+  const response = await httpClient.get<Book[]>(`/books/best`);
+  return response.data;
+};

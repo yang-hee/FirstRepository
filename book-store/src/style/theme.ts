@@ -18,6 +18,9 @@ export type ButtonSchema = "primary" | "normal" | "like";
 // layout 너비 제한하고 타입 지정
 export type LayoutWidth = "large" | "medium" | "small";
 
+// 모바일 대응
+export type MediaQuery = "mobile" | "tablet" | "desktop";
+
 declare module "styled-components" {
   export interface DefaultTheme {
     name: ThemeName;
@@ -45,6 +48,9 @@ declare module "styled-components" {
       width: {
         [key in LayoutWidth]: string;
       };
+    };
+    mediaQuery: {
+      [key in MediaQuery]: string;
     };
   }
 }
@@ -118,6 +124,11 @@ export const light: DefaultTheme = {
       medium: "760px",
       small: "320px",
     },
+  },
+  mediaQuery: {
+    mobile: "(max-width: 768px)", // 768 이하
+    tablet: "(max-width: 1024px)", // 1024 이하
+    desktop: "(min-width: 1025px)", // 1025 이상
   },
 };
 

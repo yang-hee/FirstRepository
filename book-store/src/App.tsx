@@ -13,6 +13,7 @@ import Order from "./pages/Order";
 import OrderList from "./pages/OrderList";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./api/queryClient";
+import ToastContainer from "./components/common/toast/ToastContainer";
 
 const routeList = [
   {
@@ -73,6 +74,7 @@ function App() {
         {/* 라우터에서 레이아웃을 포함한 컴포넌트를 관리해줘야하기 때문에 Layout을 router element로 빼준다 */}
         {/* <Layout> */}
         <RouterProvider router={router} />
+        <ToastContainer />
         {/* <Home /> */}
         {/* </Layout> */}
       </BookStoreThemeProvider>
